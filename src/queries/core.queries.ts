@@ -21,3 +21,19 @@ export const getPairs = async (pairAdresses: string[]) => {
 
   return response.pairs;
 };
+
+const getJoePriceQueryDocument = gql`
+  query {
+    pairs(where: { id: "0x3bc40d4307cd946157447cd55d70ee7495ba6140" }) {
+      id
+      name
+      token1Price
+    }
+  }
+`;
+
+export const getJoePrice = async () => {
+  const response: Subscription = await client.request(getJoePriceQueryDocument);
+
+  return response.pairs[0].token1Price;
+};

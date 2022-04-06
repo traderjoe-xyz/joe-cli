@@ -7,6 +7,11 @@ generates:
     plugins:
       - typescript
       - typescript-operations
+  ./src/generated/boostedmastercheftypes.ts:
+    schema: https://api.thegraph.com/subgraphs/name/traderjoe-xyz/boosted-master-chef
+    plugins:
+      - typescript
+      - typescript-operations
   ./src/generated/exchangetypes.ts:
     schema: https://api.thegraph.com/subgraphs/name/traderjoe-xyz/exchange
     plugins:
