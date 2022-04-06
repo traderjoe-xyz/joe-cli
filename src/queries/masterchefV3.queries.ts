@@ -14,6 +14,8 @@ const testquery = gql`
         id
         pair
         allocPoint
+        balance
+        jlpBalance
         rewarder {
           name
         }

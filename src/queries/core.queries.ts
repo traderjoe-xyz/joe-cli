@@ -8,6 +8,8 @@ const getPairsQueryDocument = gql`
     pairs(where: { id_in: $id_in }) {
       id
       name
+      reserveUSD
+      totalSupply
     }
   }
 `;
