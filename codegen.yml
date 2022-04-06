@@ -1,0 +1,14 @@
+overwrite: true
+schema: "https://api.thegraph.com/subgraphs/name/traderjoe-xyz/masterchefv2"
+documents: "src/queries/*.ts"
+generates:
+  src/generated/graphqltypes.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      # - "typescript-resolvers"
+      # - "typescript-graphql-files-modules"
+      # - "typescript-document-nodes"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
