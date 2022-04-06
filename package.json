@@ -7,7 +7,8 @@
   "license": "MIT",
   "dependencies": {
     "@graphql-codegen/typescript-resolvers": "^2.6.1",
-    "graphql": "^16.3.0"
+    "graphql": "^16.3.0",
+    "graphql-request": "^4.2.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.6.2",
@@ -25,11 +26,11 @@
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "graphql": {
-    "schema": "masterchefV2.graphql",
+    "schema": "exchange.graphql",
     "extensions": {
       "endpoints": {
         "default": {
-          "url": "https://api.thegraph.com/subgraphs/name/traderjoe-xyz/masterchefv2"
+          "url": "https://api.thegraph.com/subgraphs/name/traderjoe-xyz/exchange"
         }
       }
     }

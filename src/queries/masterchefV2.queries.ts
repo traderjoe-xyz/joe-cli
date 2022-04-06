@@ -4,18 +4,25 @@ import { MasterChef, Query } from "../generated/graphqltypes";
 const client = new GraphQLClient("https://api.thegraph.com/subgraphs/name/traderjoe-xyz/masterchefv2", { headers: {} });
 
 const testquery = gql`
-  #   query Masterchef()
   query {
     masterChefs(first: 1) {
       id
-      devAddr
-      treasuryAddr
-      investorAddr
+      joePerSec
+      totalAllocPoint
+      poolCount
+      pools(where: { allocPoint_gt: 0 }) {
+        id
+        pair
+        allocPoint
+        rewarder {
+          name
+        }
+      }
     }
   }
 `;
 
-export const TestQuery = async () => {
+export const getMasterchefV2 = async () => {
   const params = {};
 
   const response: Query = await client.request(testquery, params);
