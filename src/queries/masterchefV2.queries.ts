@@ -17,6 +17,7 @@ const getMasterchefV2QueryDocument = gql`
         id
         pair
         allocPoint
+        jlpBalance
         rewarder {
           name
         }
