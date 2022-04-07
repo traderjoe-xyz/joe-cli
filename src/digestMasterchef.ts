@@ -1,46 +1,48 @@
 import { getPairs } from "./queries/exchange.queries";
 import { MasterChef } from "generated/mastercheftypes";
 
-export interface Result {
+export interface FarmInfo {
   pairaddress?: string;
   pairname: string;
-  allocationweight?: string;
-  joePerSec?: string;
+  allocationweight?: number;
+  joePerSec?: number;
   poolTotalSupply?: number;
-  TVL: number;
-  APR?: string;
+  poolTVL: number;
+  farmTVL?: number;
+  APR?: number;
 }
 const SECONDS_IN_YEAR = 60 * 60 * 24 * 365;
 
 export async function digestMasterchef(
   masterchef: MasterChef,
-  totalAllocPoint,
-  totaljoePerSec,
-  joePrice
-): Promise<Result[]> {
+  totalAllocPoint: number,
+  totaljoePerSec: number,
+  joePrice: number
+): Promise<FarmInfo[]> {
   const Boostedpairs = await getPairs(masterchef.pools.map((pool) => pool.pair));
 
-  let Boostedresults: Result[] = Boostedpairs.map((pair) => {
+  let Boostedresults: FarmInfo[] = Boostedpairs.map((pair) => {
     return {
       pairaddress: pair.id,
       pairname: pair.name,
-      TVL: pair.reserveUSD,
+      poolTVL: pair.reserveUSD,
       poolTotalSupply: pair.totalSupply,
     };
   });
   Boostedresults = Boostedresults.map((result) => {
     const correspondingPool = masterchef.pools.find((pool) => pool.pair === result.pairaddress);
-
     const emmissionshare = correspondingPool.allocPoint / totalAllocPoint;
     const joePerSec = (emmissionshare * totaljoePerSec) / 1e18;
-    const tvl = (correspondingPool.jlpBalance / result.poolTotalSupply) * result.TVL;
+    const tvl = (correspondingPool.jlpBalance / result.poolTotalSupply) * result.poolTVL;
+
     return {
       pairaddress: result.pairaddress,
       pairname: result.pairname,
-      TVL: tvl,
-      allocationweight: (emmissionshare * 100).toFixed(2),
-      joePerSec: joePerSec.toFixed(2),
-      APR: ((joePrice * joePerSec * SECONDS_IN_YEAR * 100) / 2 / tvl).toFixed(2),
+      poolTVL: result.poolTVL,
+      farmTVL: tvl,
+      allocationweight: emmissionshare * 100,
+      joePerSec: joePerSec,
+      APR: (joePrice * joePerSec * SECONDS_IN_YEAR * 100) / 2 / tvl,
     };
   });
 
