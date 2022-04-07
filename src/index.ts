@@ -39,6 +39,7 @@ const main = async () => {
     joePrice
   );
 
+  // Displaying results properly
   const results: Result[] = V3farms.concat(Boostedfarms).map((farm) => {
     return {
       pairname: farm.pairname,
@@ -49,6 +50,7 @@ const main = async () => {
       APR: farm.APR.toFixed(2) + " %",
     };
   });
+
   console.table(results);
 };
 
