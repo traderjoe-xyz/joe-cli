@@ -1,7 +1,7 @@
 import { getPairs } from "./queries/exchange.queries";
 import { MasterChef } from "generated/mastercheftypes";
 
-export interface FarmInfo {
+interface FarmInfo {
   pairaddress?: string;
   pairname: string;
   allocationweight?: number;
@@ -19,6 +19,7 @@ export async function digestMasterchef(
   totaljoePerSec: number,
   joePrice: number
 ): Promise<FarmInfo[]> {
+  // Fetching all the corresponding pairs from the exchange subgraph
   const Boostedpairs = await getPairs(masterchef.pools.map((pool) => pool.pair));
 
   let Boostedresults: FarmInfo[] = Boostedpairs.map((pair) => {
@@ -29,6 +30,8 @@ export async function digestMasterchef(
       poolTotalSupply: pair.totalSupply,
     };
   });
+
+  //Populating infos from masterchef farm and exchange pool
   Boostedresults = Boostedresults.map((result) => {
     const correspondingPool = masterchef.pools.find((pool) => pool.pair === result.pairaddress);
     const emmissionshare = correspondingPool.allocPoint / totalAllocPoint;

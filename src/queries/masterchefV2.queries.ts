@@ -1,12 +1,12 @@
 import { GraphQLClient, gql } from "graphql-request";
-import { MasterChef, Query } from "../generated/mastercheftypes";
+import { Query } from "../generated/mastercheftypes";
 
 const client = new GraphQLClient(
   "https://api.thegraph.com/subgraphs/name/traderjoe-xyz/masterchefv2",
   { headers: {} }
 );
 
-const testquery = gql`
+const getMasterchefV2QueryDocument = gql`
   query {
     masterChefs(first: 1) {
       id
@@ -26,9 +26,7 @@ const testquery = gql`
 `;
 
 export const getMasterchefV2 = async () => {
-  const params = {};
-
-  const response: Query = await client.request(testquery, params);
+  const response: Query = await client.request(getMasterchefV2QueryDocument);
 
   return response.masterChefs[0];
 };

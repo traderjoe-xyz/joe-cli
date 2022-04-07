@@ -1,6 +1,3 @@
-# overwrite: true
-# schema: "https://api.thegraph.com/subgraphs/name/traderjoe-xyz/masterchefv2"
-# documents: "src/queries/*.ts"
 generates:
   ./src/generated/mastercheftypes.ts:
     schema: https://api.thegraph.com/subgraphs/name/traderjoe-xyz/masterchefv3
@@ -17,14 +14,3 @@ generates:
     plugins:
       - typescript
       - typescript-operations
-# generates:
-#   src/generated/graphqltypes.ts:
-#     plugins:
-#       - "typescript"
-#       - "typescript-operations"
-#       # - "typescript-resolvers"
-#       # - "typescript-graphql-files-modules"
-#       # - "typescript-document-nodes"
-#   ./graphql.schema.json:
-#     plugins:
-#       - "introspection"
