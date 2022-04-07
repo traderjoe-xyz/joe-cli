@@ -32,5 +32,5 @@ export const getBoostedMasterchef = async () => {
 
   const response: Query = await client.request(testquery, params);
 
-  return response.masterChefs;
+  return response.masterChefs[0];
 };
