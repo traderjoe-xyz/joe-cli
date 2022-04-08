@@ -1,5 +1,5 @@
 {
-  "name": "joe-cli",
+  "name": "@traderjoe-xyz/joe-cli",
   "version": "0.0.3",
   "description": "Tool for monitoring allocation weights of Trader Joe's farms",
   "main": "dist/bin/cli.js",
