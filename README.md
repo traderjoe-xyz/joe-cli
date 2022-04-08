@@ -16,4 +16,7 @@ After compiling :
 
 ```
 yarn global add file:*folder location*
+joe-cli
+joe-cli farm-allocations
 ```
+

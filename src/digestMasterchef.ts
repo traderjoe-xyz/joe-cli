@@ -1,7 +1,8 @@
 import { getPairs } from "./queries/exchange.queries";
 import { MasterChef } from "generated/mastercheftypes";
 
-interface FarmInfo {
+export interface FarmInfo {
+  pairId?: string;
   pairaddress?: string;
   pairname: string;
   allocationweight?: number;
@@ -20,9 +21,9 @@ export async function digestMasterchef(
   joePrice: number
 ): Promise<FarmInfo[]> {
   // Fetching all the corresponding pairs from the exchange subgraph
-  const Boostedpairs = await getPairs(masterchef.pools.map((pool) => pool.pair));
+  const pairs = await getPairs(masterchef.pools.map((pool) => pool.pair));
 
-  let Boostedresults: FarmInfo[] = Boostedpairs.map((pair) => {
+  let results: FarmInfo[] = pairs.map((pair) => {
     return {
       pairaddress: pair.id,
       pairname: pair.name,
@@ -32,22 +33,23 @@ export async function digestMasterchef(
   });
 
   //Populating infos from masterchef farm and exchange pool
-  Boostedresults = Boostedresults.map((result) => {
+  results = results.map((result) => {
     const correspondingPool = masterchef.pools.find((pool) => pool.pair === result.pairaddress);
     const emmissionshare = correspondingPool.allocPoint / totalAllocPoint;
     const joePerSec = (emmissionshare * totaljoePerSec) / 1e18;
     const tvl = (correspondingPool.jlpBalance / result.poolTotalSupply) * result.poolTVL;
 
     return {
+      pairId: correspondingPool.id,
       pairaddress: result.pairaddress,
       pairname: result.pairname,
       poolTVL: result.poolTVL,
       farmTVL: tvl,
-      allocationweight: emmissionshare * 100,
+      allocationweight: correspondingPool.allocPoint,
       joePerSec: joePerSec,
-      APR: (joePrice * joePerSec * SECONDS_IN_YEAR * 100) / 2 / tvl,
+      APR: (joePrice * joePerSec * SECONDS_IN_YEAR * 100) / tvl,
     };
   });
 
-  return Boostedresults;
+  return results;
 }

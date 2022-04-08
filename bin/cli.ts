@@ -15,7 +15,7 @@ function addCommands() {
 function start() {
   program.usage("[command] [options]");
 
-  program.version("0.0.2", "-v, --version", "Output the version number.");
+  program.version("0.0.3", "-v, --version", "Output the version number.");
 
   program.addHelpCommand("help [command]", "Display help for command.");
   program.helpOption("-h, --help", "Display help for command.");
