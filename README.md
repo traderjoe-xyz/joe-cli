@@ -1,11 +1,19 @@
-# Pool allocation weight monitor
+# Joe CLI
 
-Tool monitoring allocation weights for trader joe farms, using trader joe's subgraphs.
+CLI tool for various monitoring tasks.
 
 ## Running from script
 
 ```
 yarn install
 yarn run codegen
-tsc && node dist/index.js
+yarn tsc && node dist/bin/cli.js farm-allocations
+```
+
+## Install from sources
+
+After compiling :
+
+```
+yarn global add file:*folder location*
 ```

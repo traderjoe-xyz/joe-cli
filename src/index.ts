@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { getMasterchefV3 } from "./queries/masterchefV3.queries";
 import { getMasterchefV2 } from "./queries/masterchefV2.queries";
 import { getBoostedMasterchef } from "./queries/boostedmasterchef.queries";
@@ -15,7 +13,7 @@ interface Result {
   APR: string;
 }
 
-const main = async () => {
+export const getFarmsAllocations = async () => {
   const masterchefV2 = await getMasterchefV2();
   // Fetching all farms with >0 allocations from the subgraphs
   const masterchefV3 = await getMasterchefV3();
@@ -66,5 +64,3 @@ const main = async () => {
 
   console.table(results);
 };
-
-main();

@@ -1,14 +1,16 @@
 {
-  "name": "pool-allocation-monitoring",
+  "name": "joe-cli",
   "version": "0.0.2",
   "description": "Tool for monitoring allocation weights of Trader Joe's farms",
-  "main": "dist/index.js",
+  "main": "dist/bin/cli.js",
   "bin": {
-    "joe-farms": "dist/index.js"
+    "joe-cli": "dist/bin/cli.js"
   },
   "author": "Patate",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^5.0.1",
+    "commander": "^9.1.0",
     "graphql": "^16.3.0",
     "graphql-request": "^4.2.0"
   },
@@ -23,13 +25,13 @@
     "@types/jest": "^27.4.1",
     "babel-jest": "^27.5.1",
     "jest": "^27.5.1",
+    "tsc": "^2.0.4",
     "typescript": "^4.6.3"
   },
   "scripts": {
-    "start": "tsc && node dist/index.js",
+    "farms": "yarn tsc && node dist/bin/cli.js farm-allocations",
     "create": "yarn run build && yarn run test",
-    "local": "yarn global add file:/Users/mathieu/Dev/traderjoe-xyz/pool-allocation-monitor && joe-farms",
-    "build": "tsc -p .",
+    "build": "yarn tsc -p .",
     "test": "jest",
     "refresh": "rm -rf ./node_modules ./package-lock.json && yarn install",
     "codegen": "graphql-codegen --config codegen.yml"
