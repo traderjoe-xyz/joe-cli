@@ -5,6 +5,16 @@ CLI tool for various monitoring tasks.
 Currently available :
 -   `farm-allocations` : retrieve all allocations from MasterchefV2, MasterchefV3 and BoostedMasterChef. APR on BoostedMasterChef is JOE APR + average boosted APR from veJOE.
 
+## Install
+```
+yarn global add @traderjoe-xyz/joe-cli
+```
+or with npm :
+```
+npm install -g @traderjoe-xyz/joe-cli
+```
+
+
 ## Install from sources
 
 ```

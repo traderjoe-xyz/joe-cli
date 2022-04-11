@@ -6,6 +6,8 @@
   "bin": {
     "joe-cli": "dist/bin/cli.js"
   },
+  "files": 
+      ["dist/*"],
   "author": "Patate",
   "license": "MIT",
   "dependencies": {
