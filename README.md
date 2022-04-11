@@ -10,7 +10,8 @@ Currently available :
 ```
 yarn install
 yarn run codegen
+yarn tsc -p .
 yarn global add file:*folder location*
 ```
 
-You should then be able to run it from terminal using `joe-cli` and every commands like `joe-cli farm-allocations`
+You should then be able to run it from terminal using `joe-cli` and every commands like `joe-cli farm-allocations`.
